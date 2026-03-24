@@ -246,6 +246,9 @@ public class Main {
                 case 4: deleteMenu(); break;
                 case 5:
                     college.getTasks().clear();
+                    for (int i = 0; i < 5; i++) {
+                        growth.get(i).clear();
+                    }
                     System.out.println("Program selesai!");
                     return;
             }
