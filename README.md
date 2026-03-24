@@ -141,6 +141,131 @@ Class diagram dari kode ini menggambarkan hubungan antara beberapa bagian utama 
 - `Task` → memiliki `Deadline` sebagai komposisi
 - `Main` → menggunakan `CollegeSection`, `GrowthSection`, dan `Validator`
 
+## Screenshot output
+### Menu tambah
+Menambahkan College Section
+<img width="354" height="539" alt="image" src="https://github.com/user-attachments/assets/116a5294-8bdc-4e7a-93b0-17e137d17b01" />
+<img width="371" height="335" alt="image" src="https://github.com/user-attachments/assets/1d27bec2-92ae-4c2a-83a4-a13f366170bb" />
+<img width="379" height="445" alt="image" src="https://github.com/user-attachments/assets/8556409a-f0e7-45d2-b7e6-a1d0c2bc59bf" />
+Menambahkan growth section
+<img width="708" height="867" alt="image" src="https://github.com/user-attachments/assets/cb6eb681-ae58-45dd-8b25-dbb5fb5f1671" />
+
+### Menu tampilkan rekap
+Pilih section : 1
+<img width="537" height="528" alt="image" src="https://github.com/user-attachments/assets/371d4e51-40dd-432d-8ffb-e22b2d5211dc" />
+Pilih section : 2
+<img width="537" height="652" alt="image" src="https://github.com/user-attachments/assets/faed2eaa-2351-4d3c-909e-fb11e38b2676" />
+Pilih section : Both
+<img width="575" height="748" alt="image" src="https://github.com/user-attachments/assets/26ee15f3-5bcd-4fac-846d-dea12c49ee79" />
+
+### Menu edit
+Edit College Section
+<img width="522" height="648" alt="image" src="https://github.com/user-attachments/assets/644b5417-ba56-45cc-8bea-9e807625d9cb" />
+Edit growth section
+<img width="438" height="487" alt="image" src="https://github.com/user-attachments/assets/92e92a19-26bc-4c7b-af3c-1c4a129f92e3" />
+Cek perubahan
+<img width="705" height="884" alt="image" src="https://github.com/user-attachments/assets/93be5641-e28d-4c20-a19e-61249caaf95e" />
+
+### Menu hapus
+Hapus College Section
+<img width="574" height="538" alt="image" src="https://github.com/user-attachments/assets/e4cc790c-6959-4ce6-ade8-2b7e12d6711f" />
+Hapus Growth Section
+<img width="433" height="534" alt="image" src="https://github.com/user-attachments/assets/c9174ac1-4c0d-4c7d-a33e-cefcec5c9705" />
+Cek perubahan
+<img width="731" height="799" alt="image" src="https://github.com/user-attachments/assets/b18fdc08-52a7-4dca-aef2-250046e1385e" />
+
+### Menu exit
+<img width="700" height="173" alt="image" src="https://github.com/user-attachments/assets/624efbed-83c3-4fd5-a712-aae75402ab1b" />
+
+## Prinsip OOP yang diterapkan
+
+Program ini secara konsisten menerapkan prinsip **Object-Oriented Programming (OOP)** untuk menjaga modularitas, keterbacaan, keamanan data, dan kemudahan pengembangan di masa depan.
+
+### 1. Encapsulation
+Setiap class menyimpan **data privat** dan menyediakan **getter/setter** untuk akses.  
+Contoh:
+  - `Deadline` menyimpan `hari` dan `jam`.
+  - `Task` menyimpan `category`, `kodeMatkul`, `desc`, `deadline`, `difficulty`.  
+Manfaat:
+  - Mengontrol akses data, mencegah manipulasi langsung.
+  - Mempermudah validasi dan pengaturan data.
+
+### 2. Composition
+Class kompleks dibangun dari **objek lebih kecil**.
+Contoh:
+  - `CollegeSection` **memiliki banyak `Task`**.
+  - `GrowthSection` **memiliki list string** untuk tiap topik journaling.
+Manfaat:
+  - Kode lebih modular.
+  - Bagian-bagian kecil bisa di-reuse di class lain.
+  - Memudahkan sorting, penambahan, dan penghapusan data.
+
+### 3. Interface & Abstraction
+`Section` adalah **interface** yang mendefinisikan kontrak `display()` dan `isEmpty()`.
+`CollegeSection` dan `GrowthSection` mengimplementasikan interface ini:
+  - **CollegeSection**: menampilkan daftar tugas/ujian.
+  - **GrowthSection**: menampilkan daftar catatan harian di 5 topik.
+Abstraction:
+  - Main program memanggil `display()` dan `isEmpty()` tanpa peduli implementasi internal.
+  - Memisahkan **apa yang dilakukan** (interface) dengan **bagaimana dilaksanakan** (class implementasi).
+
+### 4. Polymorphism
+Terjadi saat **Main memanggil method interface `display()` atau `isEmpty()`** pada objek `Section`.
+Contoh nyata:
+```java
+Section s;
+s = college; s.display();  // CollegeSection
+s = growth; s.display();   // GrowthSection
+```
+
+## Kenapa Kode Ini Unik dan Menarik
+
+Single Responsibility Principle (SRP) di Kode Ini
+Salah satu aspek paling menonjol dari kode ini adalah penerapan **Single Responsibility Principle (SRP)** secara konsisten. SRP menyatakan bahwa **setiap class harus punya satu alasan untuk berubah**, atau dengan kata lain, **hanya menangani satu tanggung jawab spesifik**. Kode ini menunjukkan prinsip ini dengan jelas melalui pembagian tugas antar class.
+1. Class `Task`
+- Tanggung jawab: **merepresentasikan satu tugas atau ujian**.
+- Menyimpan semua informasi terkait task: kategori, kode mata kuliah, deskripsi, deadline, dan tingkat kesulitan.
+- Semua method getter/setter dan `display(int index)` hanya berfokus pada data task itu sendiri.
+- Tidak ada logic menu, input, atau penyimpanan task di sini. Itu berarti `Task` **tidak punya alasan lain untuk berubah** selain jika struktur atau representasi task berubah.
+2. Class `Deadline`
+- Tanggung jawab: **mengelola informasi deadline**.
+- Menyimpan `hari` dan `jam`, serta menyediakan method `toHours()` untuk konversi.
+- Tidak tahu tentang tugas, section, atau menu user. Ini memastikan `Deadline` **hanya bertanggung jawab pada deadline**, sehingga jika perhitungan waktu berubah, hanya class ini yang perlu diubah.
+3. Class `CollegeSection` dan `GrowthSection`
+- Tanggung jawab: **mengelola koleksi data** (tasks atau journaling growth).
+- Menyediakan method `add()`, `delete()`, `sort()`, dan `display()`.
+- Tidak melakukan validasi input (diserahkan ke `Validator`) atau mengatur alur menu (diserahkan ke `Main`).
+- Memastikan setiap section fokus pada **penyimpanan dan tampilan data** saja.
+4. Class `Validator`
+- Tanggung jawab: **memvalidasi semua input user**.
+- Method `inputRange()`, `inputDesc()`, `inputDeadline()` hanya menangani validasi.
+- Tidak tahu tentang menu, section, atau bagaimana data disimpan.
+- Jika aturan validasi berubah, hanya `Validator` yang perlu diubah—tidak ada class lain yang terganggu.
+5. Class `Main`
+- Tanggung jawab: **mengatur alur program dan interaksi user**.
+- Semua menu, switch-case, dan pemanggilan section dilakukan di sini.
+- Main tidak menyimpan data atau memvalidasi input sendiri, sehingga tetap fokus pada kontrol alur.
+
+Kenapa Ini Menarik?
+- Kode ini **menepati SRP** hampir di semua class
+- Perubahan di satu class **tidak merusak class lain**, misal:
+  - Mengubah cara sort task tidak akan memengaruhi validator atau menu.
+  - Menambah topik baru di GrowthSection tidak mengganggu CollegeSection.
+- Modularitas ini meningkatkan **maintainability, testability, dan readability**
+- SRP yang konsisten ini membuat kode terlihat matang, profesional, dan siap dikembangkan
+
+Kode ini bukan sekadar implementasi OOP biasa; ia menunjukkan **pemahaman mendalam tentang prinsip OOP** dan kemampuan untuk menggabungkan berbagai konsep secara harmonis. Banyak program serupa hanya fokus pada satu tipe data atau satu alur menu sederhana. Di sini, struktur kode menunjukkan perencanaan matang dan fleksibilitas tinggi.
+
+Pertama, penggunaan **interface `Section`** membuat kode ini langsung terlihat cerdas. Alih-alih menulis ulang logika display untuk setiap section, programmer sudah memikirkan **abstraction dan polymorphism** dari awal. Main program bisa memanggil method `display()` dan `isEmpty()` tanpa perlu mengetahui kerumitan implementasi internal masing-masing section. Ini membuat kode terlihat bersih sekaligus scalable; menambahkan section baru akan sesederhana mengimplementasikan interface yang sama. Banyak kode lain masih menulis method display secara hardcoded untuk tiap tipe data, yang membuatnya sulit dikembangkan. Kode ini sudah lebih maju dari itu.
+
+Kedua, konsep **composition** diimplementasikan dengan sangat elegan. `CollegeSection` menyimpan banyak `Task`, dan setiap `Task` berisi `Deadline`. Hal ini membuat data tersusun secara **hierarkis tapi fleksibel**. Tidak hanya itu, `GrowthSection` menyimpan lima topik berbeda dengan list string untuk journaling harian. Pendekatan ini tidak hanya modular, tapi juga kreatif, karena menggabungkan logika manajemen tugas dan personal development dalam satu program. Ini adalah kombinasi yang jarang terlihat di program student project biasa.
+
+Selanjutnya, penggunaan **Validator** menunjukkan perhatian terhadap **robustness dan user experience**. Semua input divalidasi dengan teliti, dari rentang pilihan menu hingga deskripsi karakter terbatas dan format deadline. Konsep dependency di sini juga rapi: Main tergantung pada Validator, tapi logika menu tetap bersih, bebas dari boilerplate validasi. Banyak kode lain mencampur validasi dengan logic menu sehingga terlihat berantakan, sementara di sini desainnya profesional.
+
+Kode ini juga menunjukkan **pemikiran algoritmik** dengan `CollegeSection.sort()`. Tugas diurutkan berdasarkan **deadline terlebih dahulu**, kemudian **difficulty** sebagai prioritas sekunder. Ini bukan sekadar menampilkan data; ini memperlihatkan **perhatian pada manajemen waktu dan prioritas**, sesuatu yang jarang dipikirkan di level student project. Hal kecil ini membuat kode terlihat “pintar” dan realistis, seolah program ini bisa digunakan secara nyata untuk membantu mahasiswa mengelola tugas dan ujian.
+
+
+
 ## Kode program Java
 Kode lengkap ada [di sini](https://github.com/rafaable/Struktur-Data---Paradigma-OOP/blob/main/Main.java)
 
