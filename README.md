@@ -370,5 +370,240 @@ Method `inputRange` memastikan input berupa angka (`int`) dalam **rentang terten
 Class ini juga memiliki method `inputDesc` untuk membatas input supaya tidak melebihi 50 karakter, serta method `inputDeadline` untuk membatasi hari dan jam dalam rentang yang masuk akal
 
 ```java
+static void addMenu() {
+        System.out.println("\nPilih section untuk ditambahkan\n1. College section\n2. Growth section");
+        System.out.print("Pilih section:");
+        int c = Validator.inputRange(sc,1,2,"Invalid input!\nPilih section:");
+
+        if (c == 1) addCollege();
+        else addGrowth();
+    }
+
+    static void addCollege() {
+        while (true) {
+            System.out.println("\nKategori 1.Exam 2.Task");
+            System.out.print("Pilih kategori:");
+            int cat = Validator.inputRange(sc,1,2,"Invalid input!\nPilih kategori:");
+
+            System.out.println("\nKode mata kuliah");
+            System.out.println("1. Strukdat");
+            System.out.println("2. SISOP");
+            System.out.println("3. SBD");
+            System.out.println("4. Kalkulus 2");
+            System.out.println("5. IMK");
+            System.out.println("6. AE");
+            System.out.print("Pilih kode matkul:");
+            int mk = Validator.inputRange(sc,1,6,"Invalid input!\nPilih kode matkul:");
+
+            System.out.print("Deskripsi:");
+            String desc = Validator.inputDesc(sc);
+
+            System.out.print("Deadline (contoh 1 hari 3 jam):");
+            Deadline d = Validator.inputDeadline(sc);
+
+            System.out.print("Difficulty 1 - 5:");
+            int diff = Validator.inputRange(sc,1,5,"Input harus rentang 1-5!\nInput ulang difficulty: ");
+
+            college.addTask(new Task(cat,mk,desc,d,diff));
+
+            System.out.print("Tambah lagi? 1.Ya 2.Tidak\nPilih opsi:");
+            int opt = Validator.inputRange(sc,1,2,"Invalid input!\nPilih opsi:");
+            if (opt == 2) break;
+        }
+    }
+
+    static void addGrowth() {
+        String[] titles = {
+            "Kejadian & orang baik hari ini",
+            "Apa yang bisa kuperbaiki hari ini",
+            "Sincere wishlist hari ini",
+            "Progress/achievement kecil hari ini",
+            "Pelajaran yang bisa diambil hari ini"
+        };
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("\n--- Part O" + (i+1) + "/O5 ) " + titles[i]);
+            System.out.println("(ketik xxx untuk lanjut ke section berikutnya)");
+
+            int nomor = 1;
+
+            while (true) {
+                System.out.print(nomor + ". ");
+                String s = sc.nextLine();
+
+                if (s.equals("xxx")) break;
+
+                growth.add(i, s);
+                nomor++;
+            }
+        }
+
+        System.out.println("Berhasil menambahkan growth section!");
+    }
+
+    static void displayMenu() {
+        System.out.println("\nPilih section untuk ditampilkan");
+        System.out.print("1. College section\n2. Growth section\n3. Both\nPilih section:");
+        int c = Validator.inputRange(sc,1,3,"Invalid input!\nPilih section:");
+
+        if (c == 1) college.display();
+        else if(c == 2) growth.display();
+        else {
+            college.display();
+            growth.display();
+        }
+        sc.nextLine();
+    }
+
+    static void deleteMenu() {
+        System.out.println("\nPilih section untuk dihapus");
+        System.out.print("1. College section\n2. Growth section\nPilih section:");
+        int c = Validator.inputRange(sc,1,2,"Invalid input!\nPilih section:");
+
+        if (c == 1) {
+            if (college.isEmpty()) {
+                System.out.println("Tidak ada data! Enter untuk menu dan tambahkan data.");
+                sc.nextLine();
+                return;
+            }
+            college.display();
+            System.out.println("Hapus index:");
+            int idx = Validator.inputRange(sc,1,college.getTasks().size(),"Tidak ada data!") - 1;
+            college.deleteTask(idx);
+        } else {
+            if (growth.isEmpty()) {
+                System.out.println("Tidak ada data! Enter untuk menu dan tambahkan data.");
+                sc.nextLine();
+                return;
+            }
+
+            System.out.println("\nPilih topik growth:");
+            System.out.println("1. Kejadian & orang baik hari ini");
+            System.out.println("2. Apa yang bisa kuperbaiki hari ini");
+            System.out.println("3. Sincere wishlist hari ini");
+            System.out.println("4. Progress/achievement kecil hari ini");
+            System.out.println("5. Pelajaran yang bisa diambil hari ini");
+            System.out.print("Pilih topik 1-5:");
+            int t = Validator.inputRange(sc,1,5,"Invalid input! Pilih topik 1 - 5:") - 1;
+            ArrayList<String> list = growth.get(t);
+
+            if (t == 0) { System.out.println("\nKejadian & orang baik hari ini");} 
+            else if (t == 1) { System.out.println("\nApa yang bisa kuperbaiki hari ini");} 
+            else if (t == 2) { System.out.println("\nSincere wishlist hari ini");} 
+            else if (t == 3) { System.out.println("\nProgress/achievement kecil hari ini");} 
+            else if (t == 4) { System.out.println("\nPelajaran yang bisa diambil hari ini");}
+            for (int i=0;i<list.size();i++) {
+                System.out.println((i+1)+". "+list.get(i));
+            }
+
+            System.out.print("Pilih list ke:");
+            int idx = Validator.inputRange(sc,1,list.size(),"Invalid input!") - 1;
+            growth.delete(t, idx);
+        }
+    }
+
+    static void editMenu() {
+        System.out.println("\nPilih section untuk diubah");
+        System.out.print("1. College section\n2. Growth section\nPilih section:");
+        int c = Validator.inputRange(sc,1,2,"Invalid input!\nPilih section:");
+
+        if (c == 1) {
+            if (college.isEmpty()) {
+                System.out.println("Tidak ada data! Enter untuk menu dan tambahkan data.");
+                sc.nextLine();
+                return;
+            }
+            college.display();
+            System.out.print("Edit list nomor: ");
+            int idx = Validator.inputRange(sc,1,college.getTasks().size(),"Invalid") - 1;
+            Task t = college.getTasks().get(idx);
+
+            System.out.println("\nKategori 1.Exam 2.Task");
+            System.out.print("Edit kategori:");
+            t.setCategory(Validator.inputRange(sc,1,2,"Invalid input!\nEdit kategori:"));
+
+            System.out.println("\nKode mata kuliah");
+            System.out.println("1. Strukdat");
+            System.out.println("2. SISOP");
+            System.out.println("3. SBD");
+            System.out.println("4. Kalkulus 2");
+            System.out.println("5. IMK");
+            System.out.println("6. AE");
+            System.out.print("Edit kode matkul:");
+            t.setKodeMatkul(Validator.inputRange(sc,1,6,"Invalid input!\nEdit kode matkul:"));
+
+            System.out.print("Edit desc:");
+            t.setDesc(Validator.inputDesc(sc));
+
+            System.out.print("Edit deadline:");
+            t.setDeadline(Validator.inputDeadline(sc));
+
+            System.out.print("Edit difficulty:");
+            t.setDifficulty(Validator.inputRange(sc,1,5,"Invalid input!\nEdit difficulty:"));
+
+            college.sort();
+
+        } else {
+            if (growth.isEmpty()) {
+                System.out.println("Tidak ada data! Enter untuk menu dan tambahkan data.");
+                sc.nextLine();
+                return;
+            }
+
+            System.out.println("\nPilih topik growth:");
+            System.out.println("1. Kejadian & orang baik hari ini");
+            System.out.println("2. Apa yang bisa kuperbaiki hari ini");
+            System.out.println("3. Sincere wishlist hari ini");
+            System.out.println("4. Progress/achievement kecil hari ini");
+            System.out.println("5. Pelajaran yang bisa diambil hari ini");
+            System.out.print("Topik 1-5:");
+            int t = Validator.inputRange(sc,1,5,"Invalid input!\nTopik 1-5:") - 1;
+
+            if (t == 0) { System.out.println("\nKejadian & orang baik hari ini");} 
+            else if (t == 1) { System.out.println("\nApa yang bisa kuperbaiki hari ini");} 
+            else if (t == 2) { System.out.println("\nSincere wishlist hari ini");} 
+            else if (t == 3) { System.out.println("\nProgress/achievement kecil hari ini");} 
+            else if (t == 4) { System.out.println("\nPelajaran yang bisa diambil hari ini");}
+            ArrayList<String> list = growth.get(t);
+
+            for (int i=0;i<list.size();i++) {
+                System.out.println((i+1)+". "+list.get(i));
+            }
 
 ```
+Pada bagian awal class ini terdapat `college` yang merupakan instansiasi objek dari `CollegeSection`, serta `growth` yang merupakan instansiasi objek dari `GrowthSection()`
+
+Class `main` berisi tampilan yang pertama kali dilihat user, yaitu `menu`, tiap menu akan dijalankan oleh beberapa fungsi sesuai kinerja yang dibutuhkan, fungsi-sungsi tersebut diletakkan dalam satu class `Main` yang sama melihat cara kerja satu sama lain yang saling berkesinambungan. 
+
+1. Tampilkan rekap menggunakan `displayMenu()`
+
+Pengguna akan diminta untuk memilih section menggunakan kode angka, lalu divalidasi menggunakan method `inputRange` dari class `Validator`. Memilih section 1 maka akan dijalankan `college.display()`, yaitu method `display()` dari class `CollegeSection`, class asal dari objek college. Memilih section 2 maka akan dijalankan `growth.display()`, yaitu method `display()` dari class `GrowthSection`, class asal dari objek `growth`. Pengguna harus menekan tombol enter untuk kembali ke opsi menu, tujuannya supaya list yang ditampilkan tidak tertimbun opsi menu yang muncul lebih dini
+
+2. Edit dengan fungsi `editMenu()`
+
+Akan dilakukan validasi ketika user memilih section untuk diedit dalam kode angka.
+
+Jika user memilih angka 1 atau edit college, akan dilakukan pemeriksaan data kosong. Lalu user akan ditampilkan list yang sudah ada agar bisa menentukan list ke berapa yang akan diedit. Setelahnya user akan diminta melakukan input untuk perubahan kategori, mata kuliah, sedkripsi, deadline, dan difficuly. Input dilakukan dengan setter karena sebelumnya atribut bersifat private. Input akan diurutkan ulang berdasarkan prioritas dan urgensinya
+
+Jika user memilih angka 1 atau edit college, akan dilakukan pemeriksaan data kosong. User akan diminta memilih topik growth mana yang ingin diedit untuk ditampilkan listnya oleh sistem. Setelah list topik terkait ditampilkan, user diminta memilih list mana yang akan diedit, disertai validasi. User selanjutnya akan menginput isi yang baru dan harus menekan enter untuk kembali ke menu utama
+
+3. Tambah dengan `addMenu()`
+
+Pada bagian awal fungsi, user akna diminta untuk memilih section diserttai validasi
+
+Opsi pertama bertujuan unutk menambahkan data tugas/exam di objek college. Di sini, validator banyak digunakan terutama untuk memasukkan data baru. Setelah data baru dimasukkan, akan dijalankan fungsi addTask() untuk objek `college` dengan memasukkan parameter sesuai input baru yang dimasukkan user. Di akhir user akan ditawarkan apakah ingin melakukan penambahan lagi untuk mempermudah tambah data beruntun
+
+Pada opsi kedua `addGrowth()` dibuat array tittle yang mewakili 5 topik growth. Dilakukan looping untuk kelima topik, di mana setiap iterasi akan terdapat nested loop untuk memungkinkan menulis beberapa list dalam satu topik. Nested loop atau pengisian list per topik akan berakhir dengan mengetikkan "xxx" dan user akan diberikan konfirmasi apabila growth section telah ditambahkan
+
+4. Hapus dengan `deleteMenu()`
+
+User akan diminta memilih section terlebih dahulu, disertai validasi dengan memanggil fungsi `inputRange` dari class `Validator` yang sebelumnya dibuat
+
+Jika dilakukan input angka 1, akan diarahkan ke penghapusan objek college dengan dilakukan validasi untuk memastikan list tidak kosong. Setelahnya akan dilakukan display dan user diminta memilih list ke berapa yang akan dihapus, input bagian ini juga disertai validasi dan peringatan jika invalid input.
+
+Jika dilakukan input angka 2, dilakukan validasi `isEmpty()` sebelum akhirnya user diminta memilih topik growth mana yang akan dihapus. Setelah memilih topik, user akan ditampilkan topik terkait untuk selanjutnya memilih list spesifik yang ingin dihapus, input bagian ini juga disertai validasi
+
+5. Exit
+
+Sebelum keluar dari program, sistem akan menghapus objek college sekaligus growth
+
