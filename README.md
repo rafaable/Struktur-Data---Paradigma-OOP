@@ -3,9 +3,22 @@ Nier kembali ke kampung halaman dengan riang, kesempatan 2 minggu yang sangat be
 
 Berandai saja tak ada gunanya. Sebagai mahasiswa IT yang sudah menjalani perkuliahan satu semester, ia merasa bahwa seharusnya pengetahuan yang didapat bisa digunakan untuk sesuatu. Ia pun membuat sebuah sistem untuk mengatur prioritas dan urgensi tugas. Selain itu, ia harus menjaga kesehatan mentalnya dengan journalling singkat setiap sore. Seketika terlintas sebuah ide untuk membuat program sesuai dengan kebutuhannya. _"Tugasku harus selesai, satu per satu, sedikit demi sedikit"_
 
+# Daftar Isi
+- [Deskripsi kasus](#deskripsi-kasus)
+- [Class Diagram](#class-diagram)
+- [Screenshot output](#screenshot-output)
+  - [Menu tambah](#menu-tambah)
+  - [Menu tampilkan rekap](#menu-tampilkan-rekap)
+  - [Menu edit](#menu-edit)
+  - [Menu hapus](#menu-hapus)
+  - [Menu exit](#menu-exit)
+- [Prinsip OOP yang diterapkan](#prinsip-oop-yang-diterapkan)
+- [Kenapa kode ini unik dan menarik](#kenapa-kode-ini-unik-dan-menarik)
+- [Kode program Java](#kode-program-java)
+
 ## Deskripsi kasus
 
-Bayangkan sebuah hari di mana semua tugas kuliah dan refleksi pribadimu tertata rapi dalam satu aplikasi kecil. Inilah inti dari kode yang ditulis Nier. Kode ini seperti lembaran jurnal interaktif harian dengan fitur CRUD dan penerapan beberapa konsep OOP
+Bayangkan sebuah hari di mana semua tugas kuliah dan refleksi pribadi tertata rapi dalam satu aplikasi kecil. Inilah inti dari kode yang ditulis Nier. Kode ini seperti lembaran jurnal interaktif harian dengan fitur CRUD dan penerapan beberapa konsep OOP
 
 Aplikasi ini dibagi menjadi **dua dunia besar**:  
 
@@ -143,39 +156,64 @@ Class diagram dari kode ini menggambarkan hubungan antara beberapa bagian utama 
 
 ## Screenshot output
 ### Menu tambah
-Menambahkan College Section
-<img width="354" height="539" alt="image" src="https://github.com/user-attachments/assets/116a5294-8bdc-4e7a-93b0-17e137d17b01" />
-<img width="371" height="335" alt="image" src="https://github.com/user-attachments/assets/1d27bec2-92ae-4c2a-83a4-a13f366170bb" />
+Menambahkan College Section<br>
+<p align="center">
+<img width="354" height="539" alt="image" src="https://github.com/user-attachments/assets/116a5294-8bdc-4e7a-93b0-17e137d17b01" /><br>
+<img width="371" height="335" alt="image" src="https://github.com/user-attachments/assets/1d27bec2-92ae-4c2a-83a4-a13f366170bb" /><br>
 <img width="379" height="445" alt="image" src="https://github.com/user-attachments/assets/8556409a-f0e7-45d2-b7e6-a1d0c2bc59bf" />
-Menambahkan growth section
+</p><br>
+
+Menambahkan growth section<br>
+<p align="center">
 <img width="708" height="867" alt="image" src="https://github.com/user-attachments/assets/cb6eb681-ae58-45dd-8b25-dbb5fb5f1671" />
+</p><br>
 
 ### Menu tampilkan rekap
-Pilih section : 1
-<img width="537" height="528" alt="image" src="https://github.com/user-attachments/assets/371d4e51-40dd-432d-8ffb-e22b2d5211dc" />
-Pilih section : 2
-<img width="537" height="652" alt="image" src="https://github.com/user-attachments/assets/faed2eaa-2351-4d3c-909e-fb11e38b2676" />
-Pilih section : Both
-<img width="575" height="748" alt="image" src="https://github.com/user-attachments/assets/26ee15f3-5bcd-4fac-846d-dea12c49ee79" />
+Pilih section : 1<br>
+<p align="center">
+<img width="537" height="528" alt="image" src="https://github.com/user-attachments/assets/371d4e51-40dd-432d-8ffb-e22b2d5211dc" /><br>
+</p>
+Pilih section : 2<br>
+<p align="center">
+<img width="537" height="652" alt="image" src="https://github.com/user-attachments/assets/faed2eaa-2351-4d3c-909e-fb11e38b2676" /><br>
+</p>
+Pilih section : Both<br>
+<p align="center">
+<img width="575" height="748" alt="image" src="https://github.com/user-attachments/assets/26ee15f3-5bcd-4fac-846d-dea12c49ee79" /><br>
+</p>
 
 ### Menu edit
-Edit College Section
+Edit College Section<br>
+<p align="center">
 <img width="522" height="648" alt="image" src="https://github.com/user-attachments/assets/644b5417-ba56-45cc-8bea-9e807625d9cb" />
-Edit growth section
+</p><br>
+Edit growth section<br>
+<p align="center">
 <img width="438" height="487" alt="image" src="https://github.com/user-attachments/assets/92e92a19-26bc-4c7b-af3c-1c4a129f92e3" />
-Cek perubahan
+</p><br>
+Cek perubahan<br>
+<p align="center">
 <img width="705" height="884" alt="image" src="https://github.com/user-attachments/assets/93be5641-e28d-4c20-a19e-61249caaf95e" />
+</p><br>
 
 ### Menu hapus
-Hapus College Section
+Hapus College Section<br>
+<p align="center">
 <img width="574" height="538" alt="image" src="https://github.com/user-attachments/assets/e4cc790c-6959-4ce6-ade8-2b7e12d6711f" />
-Hapus Growth Section
+</p><br>
+Hapus Growth Section<br>
+<p align="center">
 <img width="433" height="534" alt="image" src="https://github.com/user-attachments/assets/c9174ac1-4c0d-4c7d-a33e-cefcec5c9705" />
-Cek perubahan
+</p><br>
+Cek perubahan<br>
+<p align="center">
 <img width="731" height="799" alt="image" src="https://github.com/user-attachments/assets/b18fdc08-52a7-4dca-aef2-250046e1385e" />
+</p><br>
 
 ### Menu exit
+<p align="center">
 <img width="700" height="173" alt="image" src="https://github.com/user-attachments/assets/624efbed-83c3-4fd5-a712-aae75402ab1b" />
+</p><br>
 
 ## Prinsip OOP yang diterapkan
 
@@ -218,7 +256,7 @@ s = college; s.display();  // CollegeSection
 s = growth; s.display();   // GrowthSection
 ```
 
-## Kenapa Kode Ini Unik dan Menarik
+## Kenapa kode ini unik dan menarik
 
 Single Responsibility Principle (SRP) di Kode Ini
 Salah satu aspek paling menonjol dari kode ini adalah penerapan **Single Responsibility Principle (SRP)** secara konsisten. SRP menyatakan bahwa **setiap class harus punya satu alasan untuk berubah**, atau dengan kata lain, **hanya menangani satu tanggung jawab spesifik**. Kode ini menunjukkan prinsip ini dengan jelas melalui pembagian tugas antar class.
